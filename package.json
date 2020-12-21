@@ -1,0 +1,16 @@
+{
+  "name": "world-cup-simulator",
+  "version": "1.0.0",
+  "description": "Simulador de la Copa del Mundo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ainacarin/world-cup-simulator.git"
+  },
+  "author": "ainacarin",
+  "license": "ISC",
+  "type": "module"
+}
