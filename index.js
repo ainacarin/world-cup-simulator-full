@@ -56,7 +56,13 @@ console.log("TOTAL DATA PLAYSOFF");
 for (let i = 0; i < playOff.totalDataPlayOff.length; i++) {
   console.log(`==== ${titlesPlayOff[i]} ${i} ====`);
   for (const match of playOff.totalDataPlayOff[i]) {
-        console.log(`${match.localTeam} ${match.resultLocalTeam} - ${match.visitTeam} ${match.resultVisitTeam} => `);
+    let winnerTeam = match.localTeam;
+    if (match.resultLocalTeam < match.resultVisitTeam) {
+      winnerTeam = match.visitTeam;
     }
+    console.log(
+      `${match.localTeam} ${match.resultLocalTeam} - ${match.visitTeam} ${match.resultVisitTeam} => ${winnerTeam}`
+    );
+  }
 }
-console.log('WINNERS', playOff.winnersPlayOff);
+console.log("WINNERS", playOff.winnersPlayOff);
