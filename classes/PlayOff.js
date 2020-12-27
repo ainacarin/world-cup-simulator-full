@@ -19,7 +19,6 @@ export default class PlayOff {
     this.config = {};
     this.setup(teams, config);
     this.totalDataPlayOff = [];
-    this.winnersPlayOff = [];
   }
 
   setupConfig(config) {
@@ -86,7 +85,6 @@ export default class PlayOff {
   createPlayOff(teams) {
     const playOff = [];
 
-    //por cada equipo se añade a local o a visit
     let indexMatch = 0;
     for (let i = 0; i < teams.length; i++) {
       if (i % 2 == 0) {
@@ -102,13 +100,12 @@ export default class PlayOff {
         indexMatch++;
       }
     }
-    console.log(playOff);
     return playOff;
   }
 
   start() {
     let teamsOnePlayOff = this.teams.map((team) => team);
-    //3 phases playoff
+    //phases playoff
     for (let index = 0; index < NUMBER_TOTAL_MATCHES_PLAYOFF; index++) {
       const playOff = this.createPlayOff(teamsOnePlayOff);
       this.playOnePlayOff(playOff);
@@ -122,7 +119,6 @@ export default class PlayOff {
         //default phase
         teamsOnePlayOff = this.getWinnersOnePlayOff(playOff);
       }
-      this.winnersPlayOff.push(teamsOnePlayOff);
       this.totalDataPlayOff.push(playOff);
     }
   }
