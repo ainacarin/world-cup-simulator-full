@@ -1,3 +1,6 @@
+
+export const groupsNames = ["A", "B", "C", "D", "E", "F", "G", "H"];
+
 export const worldTeams = [
     'Spain', 'Netherlands', 'Chile', 'Australia', 'Brazil', 'Croatia', 'Mexico', 'Cameroon',  
     'Uruguay', 'Costa Rica', 'England', 'Italy', 'Colombia', 'Greece', 'Ivory Coast', 'Japan',

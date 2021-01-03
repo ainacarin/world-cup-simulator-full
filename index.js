@@ -1,15 +1,26 @@
+/* import { nameWorldCup, config } from './config.js'
+import { worldTeams, titlesPlayOff } from './data.js'
+import WorldCupSimulator from "./classes/PlayOff.js"; */
+
 import { nameWorldCup, config } from './config.js'
 import { worldTeams, titlesPlayOff } from './data.js'
-import WorldCupSimulator from "./classes/PlayOff.js";
+import WorldCupSimulator from "./classes/GroupsPhase.js";
+
 
 /* VARIABLES */
 let winnerWorldCup = '';
 
-/* MAIN PROGRAM */
+
+
+const groupsPhase = new WorldCupSimulator(nameWorldCup, worldTeams, config);
+console.log(groupsPhase.name);
+console.log(groupsPhase.teams);
+
+/* //MAIN PROGRAM
 const playOff = new WorldCupSimulator(nameWorldCup, worldTeams, config);
 playOff.start();
 
-/* DISPLAY */
+//DISPLAY
 console.log('');
 console.log(`${playOff.name}`);
 console.log('==============================================');
@@ -31,4 +42,4 @@ console.log('');
 console.log('');
 console.log('===============================================');
 console.log(`¡${winnerWorldCup} campeón del mundo!`);
-console.log('===============================================');
+console.log('==============================================='); */
