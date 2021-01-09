@@ -13,9 +13,16 @@ let winnerWorldCup = '';
 
 
 const groupsPhase = new WorldCupSimulator(nameWorldCup, worldTeams, config);
-console.log(groupsPhase.name);
-console.log(groupsPhase.teams);
+groupsPhase.startCompetition();
 
+
+/* console.log(groupsPhase.name);
+console.log(groupsPhase.teams);
+console.log(groupsPhase.totalDataGroupsPhase); */
+/* for(let i = 0; i < groupsPhase.totalDataGroupsPhase.length; i++) {
+  console.log('Group',groupsPhase.totalDataGroupsPhase[i]);
+}
+ */
 /* //MAIN PROGRAM
 const playOff = new WorldCupSimulator(nameWorldCup, worldTeams, config);
 playOff.start();
