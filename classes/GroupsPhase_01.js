@@ -9,6 +9,7 @@ export default class GroupsPhase {
     this.teamsNames = [];
     this.config = {};
     this.teamsPerGroup = teams.length / groupsNames.length;
+    console.log(this.teamsPerGroup)
     this.totalDataGroupsPhase = [];
     this.setup(teams, config);
     /*         this.totalDataPlayOff = []; */
