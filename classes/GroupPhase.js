@@ -1,4 +1,4 @@
-import { shuffle } from "../utils.js";
+import { shuffle, generateResultGoals } from "../utils.js";
 import { groupsNames } from "../data.js";
 import Group from './Group.js';
 import Team from './Team.js';
@@ -67,5 +67,13 @@ export default class GroupPhase {
     this.getTeamsNames();
     this.setupConfig(config);
     this.setupGroups();
+  }
+
+  configSchedulesMatchDays() {
+      this.groups.forEach(group => group.configScheduleMatchDays());
+  }
+
+  start(){
+    this.groups.forEach(group => group.start());
   }
 }

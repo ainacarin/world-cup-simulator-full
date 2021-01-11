@@ -8,3 +8,7 @@ export const shuffle = Array.prototype.shuffle = function () {
     }
     return this;
   };
+
+export const generateResultGoals = function() {
+    return Math.round(Math.random() * 10);
+  }

@@ -8,6 +8,13 @@ export const worldTeams = [
     'Belgium', 'Algeria', 'Russia', 'So, Korea', 'Germany', 'Portugal', 'Ghana', 'USA'
 ];
 
+export const LOCAL_TEAM = 0;
+export const localTeamText = 'Local Team';
+export const VISIT_TEAM = 1;
+export const visitTeamText = 'Visit Team';
+
+export const JORNADA = 'Jornada ';
+
 export const titlesPlayOff = [
     "OCTAVOS DE FINAL",
     "CUARTOS DE FINAL",

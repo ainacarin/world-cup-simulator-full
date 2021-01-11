@@ -3,10 +3,11 @@ import { worldTeams, titlesPlayOff } from './data.js'
 import WorldCupSimulator from "./classes/PlayOff.js"; */
 
 import { nameWorldCup, config } from './config.js'
-import { worldTeams, titlesPlayOff, groupsNames } from './data.js'
+import { worldTeams, titlesPlayOff, groupsNames, JORNADA, LOCAL_TEAM, VISIT_TEAM } from './data.js'
 /* import WorldCupSimulator from "./classes/GroupsPhase_01.js"; */
 import WorldCupSimulator from "./classes/GroupPhase.js";
 import Group from './classes/Group.js';
+import GroupPhase from './classes/GroupPhase.js';
 
 /* VARIABLES */
 let winnerWorldCup = '';
@@ -14,8 +15,29 @@ let winnerWorldCup = '';
 
 
 const groupsPhase = new WorldCupSimulator(nameWorldCup, worldTeams, config);
-console.log(groupsPhase.name)
-for (const team of groupsPhase.teams) {
+//Muestra título de campeonato
+console.log(groupsPhase.name);
+//Muestra grupos con equipos participantes
+groupsPhase.configSchedulesMatchDays();
+groupsPhase.groups.forEach(group => {
+  console.log();
+  console.log(`Grupo ${group.name}`);
+  console.log('-----------------------')
+  group.teams.forEach(team => console.log(team.name));
+  let indexMatch = 1;
+  group.matchScheduleDay.forEach(match => {
+    console.log();
+    console.log(`JORNADA ${indexMatch}`);
+    match.forEach(matchDay => {
+      console.log(`- ${matchDay[LOCAL_TEAM]} vs ${matchDay[VISIT_TEAM]}`);
+    })
+    indexMatch++;
+  })
+});
+groupsPhase.start();
+
+
+/* for (const team of groupsPhase.teams) {
   console.log(team)
 }
 console.log(groupsPhase.config)
@@ -25,7 +47,10 @@ for (const group of groupsPhase.groups) {
   for (const team of group.teams) {
     console.log(team)
   }
-}
+  for (const scheduleMatchDay of group.matchScheduleDay) {
+    console.log(scheduleMatchDay);
+  }
+} */
 
 
 /* console.log(groupsPhase.name);
