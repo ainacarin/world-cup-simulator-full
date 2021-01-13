@@ -12,7 +12,6 @@ export default class Group {
     this.name = name;
     this.teams = [];
     this.summaries = [];
-    console.log("SUMMARIES ", this.summaries);
     this.config = {};
     this.matchScheduleDay = [];
     this.setup(teams, config);
@@ -141,34 +140,40 @@ export default class Group {
 
   searchResultMatch(teamA, teamB, results) {
     const result = [];
-    result = results.filter(result => result.localTeam == teamA.name && result.visitTeam == teamB.name);
-    if(result.length == 0) {
-      result = results.filter(result => result.localTeam == teamB.name && result.visitTeam == teamA.name);
+    result = results.filter(
+      (result) =>
+        result.localTeam == teamA.name && result.visitTeam == teamB.name
+    );
+    if (result.length == 0) {
+      result = results.filter(
+        (result) =>
+          result.localTeam == teamB.name && result.visitTeam == teamA.name
+      );
     }
     return result;
   }
 
   getWinnerNameResult(result) {
-    if(result.localResult > result.visitResult) {
+    if (result.localResult > result.visitResult) {
       return result.localTeam;
-   } else if(result.localResult < result.visitResult) {
-     return result.visitTeam;
-   } else{
-     return null;
-   }
+    } else if (result.localResult < result.visitResult) {
+      return result.visitTeam;
+    } else {
+      return null;
+    }
   }
 
   getWinnerTeamName(teamA, teamB, matchSummaryResults, summaries) {
     const resultFiltered = [];
     resultFiltered = this.searchResultMatch(teamA, teamB, matchSummaryResults);
-    if(resultFiltered.length > 0) {
+    if (resultFiltered.length > 0) {
       return this.getWinnerNameResult(resultFiltered);
     } else {
       const found = false;
-      for(const i = 0; i < this.summaries.length && found == false; i++) {
+      for (const i = 0; i < this.summaries.length && found == false; i++) {
         const summary = this.summaries[i];
         resultFiltered = this.searchResultMatch(teamA, teamB, summary);
-        if(result.length > 0) {
+        if (result.length > 0) {
           found = true;
         }
       }
@@ -186,7 +191,12 @@ export default class Group {
       } else {
         //match: teamA vs teamB
         if (teamA.points == teamB.points) {
-          const winnerNameMatch = this.getWinnerTeamName(teamA, teamB, matchSummaryResults, summaries);
+          const winnerNameMatch = this.getWinnerTeamName(
+            teamA,
+            teamB,
+            matchSummaryResults,
+            summaries
+          );
           if (winnerNameMatch == teamA.name) {
             return -1;
           } else if (winnerNameMatch == teamB.name) {
@@ -228,7 +238,8 @@ export default class Group {
         matchSummary.results.push(result);
       });
       //Standings
-/*       this.calculateStandings(matchSummary.results, this.summaries); */
+      /*       this.calculateStandings(matchSummary.results, this.summaries); */
+      this.summaries.push(matchSummary);
     });
   }
 }

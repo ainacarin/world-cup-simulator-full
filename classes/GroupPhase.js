@@ -76,4 +76,8 @@ export default class GroupPhase {
   start(){
     this.groups.forEach(group => group.start());
   }
+
+  getNumberMatchDay() {
+    return this.groups[0].summaries.length;
+  }
 }
