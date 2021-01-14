@@ -52,6 +52,8 @@ for(let indexNumberMatchDay = 0; indexNumberMatchDay < numberMatchDay; indexNumb
 /*     console.log(group.summaries[indexNumberMatchDay].results); */
     const results = group.summaries[indexNumberMatchDay].results;
     results.forEach(result => console.log(`${result.localTeam} ${result.localResult} - ${result.visitTeam} ${result.visitResult}`));
+    const summary = group.summaries[indexNumberMatchDay].standings;
+    console.log(summary);
   });
 }
 

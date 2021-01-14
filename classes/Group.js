@@ -1,6 +1,6 @@
 /* import { LOCAL_TEAM, localTeamText, VISIT_TEAM, visitTeamText } from "../data";
  */
-import { generateResultGoals } from "../utils.js";
+import { generateResultGoals, getWinnerTeamNameResult } from "../utils.js";
 
 const LOCAL_TEAM = 0;
 const localTeamText = "Local Team";
@@ -138,7 +138,7 @@ export default class Group {
     }
   }
 
-  searchResultMatch(teamA, teamB, results) {
+/*   searchResultMatch(teamA, teamB, results) {
     const result = [];
     result = results.filter(
       (result) =>
@@ -151,9 +151,9 @@ export default class Group {
       );
     }
     return result;
-  }
+  } */
 
-  getWinnerNameResult(result) {
+/*   getWinnerNameResult(result) {
     if (result.localResult > result.visitResult) {
       return result.localTeam;
     } else if (result.localResult < result.visitResult) {
@@ -161,10 +161,14 @@ export default class Group {
     } else {
       return null;
     }
-  }
+  } */
 
-  getWinnerTeamName(teamA, teamB, matchSummaryResults, summaries) {
-    const resultFiltered = [];
+ /*  getWinnerTeamName(teamA, teamB, matchSummaryResults, resultsBeforeMatchesDays) {
+    console.log('GETWINNERTEAMNAME TEAM A', teamA);
+    console.log('GETWINNERTEAMNAME TEAM B', teamB);
+    console.log('GETWINNERTEAMNAME RESULTS', matchSummaryResults);
+    console.log('GETWINNERTEAMNAME RESULTS BEFORE', resultsBeforeMatchesDays); */
+/*     const resultFiltered = [];
     resultFiltered = this.searchResultMatch(teamA, teamB, matchSummaryResults);
     if (resultFiltered.length > 0) {
       return this.getWinnerNameResult(resultFiltered);
@@ -178,10 +182,12 @@ export default class Group {
         }
       }
       return this.getWinnerNameResult(resultFiltered);
-    }
-  }
+    } */
+/*     return null;
+  } */
 
   calculateStandings(matchSummaryResults, summaries) {
+    const resultsBeforeMatchesDays = summaries.map(summary => summary.results);
     this.teams.sort(function (teamA, teamB) {
       //points
       if (teamA.points > teamB.points) {
@@ -191,11 +197,11 @@ export default class Group {
       } else {
         //match: teamA vs teamB
         if (teamA.points == teamB.points) {
-          const winnerNameMatch = this.getWinnerTeamName(
+          const winnerNameMatch = getWinnerTeamNameResult(
             teamA,
             teamB,
             matchSummaryResults,
-            summaries
+            resultsBeforeMatchesDays
           );
           if (winnerNameMatch == teamA.name) {
             return -1;
@@ -223,7 +229,6 @@ export default class Group {
         }
       }
     });
-    console.log(this.teams);
   }
 
   start() {
@@ -239,7 +244,9 @@ export default class Group {
         matchSummary.results.push(result);
       });
       //Standings
-      /*       this.calculateStandings(matchSummary.results, this.summaries); */
+      const func = this.getWinnerNameResult;
+      this.calculateStandings(matchSummary.results, this.summaries, func);
+      matchSummary.standings = this.teams.map(team => Object.assign({}, team));
       this.summaries.push(matchSummary);
     });
   }
