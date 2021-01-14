@@ -14,8 +14,7 @@ export const generateResultGoals = function() {
   }
 
   function searchResultMatch(teamA, teamB, results) {
-/*     const result = [];
-    result = results.filter(
+    let result = results.filter(
       (result) =>
         result.localTeam == teamA.name && result.visitTeam == teamB.name
     );
@@ -25,33 +24,64 @@ export const generateResultGoals = function() {
           result.localTeam == teamB.name && result.visitTeam == teamA.name
       );
     }
-    return result; */
+    return result;
   }
 
   function getWinnerNameResult(result) {
-/*     if (result.localResult > result.visitResult) {
+    if (result.localResult > result.visitResult) {
       return result.localTeam;
     } else if (result.localResult < result.visitResult) {
       return result.visitTeam;
     } else {
       return null;
-    }  */
+    } 
   }
 
-  export const getWinnerTeamNameResult= function(teamA, teamB, matchSummaryResults, resultsBeforeMatchesDays) {
+  export const getWinnerTeamNameResult = function(teamA, teamB, matchSummaryResults, resultsBeforeMatchesDays) {
+/*     console.log('GET matchSummaryResults', matchSummaryResults);
+    console.log('GET resultsBeforeMatchesDays', resultsBeforeMatchesDays); */
+    /*console.log('GET matchSummaryResults');
+         for(let i = 0; i < matchSummaryResults.length; i++) {
+      console.log(matchSummaryResults[i]);
+      result = searchResultMatch(teamA, teamB, matchSummaryResults[i])
+    } */
+    let result = searchResultMatch(teamA, teamB, matchSummaryResults);
+    if(result.length == 0) {
+      let found = false;
+      for(let i = 0; i < resultsBeforeMatchesDays.length && found == false; i++) {
+        const res = resultsBeforeMatchesDays[i];
+        result = searchResultMatch(teamA, teamB, res);
+        if(result.length > 0){
+          found = true;
+        }
+      }
+    }
+    if(result.length == 0) {
+      return null;
+    } else {
+      return getWinnerNameResult(result);
+    }
+/*     console.log('GET resultsBeforeMatchesDays'); 
+    for(let i = 0; i < resultsBeforeMatchesDays.length; i++) {
+      const res = resultsBeforeMatchesDays[i];
+      for(let a = 0; a < res.length; a++) {
+        console.log(res[a]);
+      }
+    } */
+
 /*     const resultFiltered = searchResultMatch(teamA, teamB, matchSummaryResults);
     if (resultFiltered.length > 0) {
       return getWinnerNameResult(resultFiltered);
     } else {
       const found = false;
-      for (const i = 0; i < this.summaries.length && found == false; i++) {
-        const summary = this.summaries[i];
-        resultFiltered = searchResultMatch(teamA, teamB, summary);
+      for (const i = 0; i < resultsBeforeMatchesDays.length && found == false; i++) {
+        const result = resultsBeforeMatchesDays[i];
+        resultFiltered = searchResultMatch(teamA, teamB, result);
         if (result.length > 0) {
           found = true;
         }
       }
       return getWinnerNameResult(resultFiltered);
     }  */
-    return null;
+/*     return null; */
   }

@@ -53,7 +53,20 @@ for(let indexNumberMatchDay = 0; indexNumberMatchDay < numberMatchDay; indexNumb
     const results = group.summaries[indexNumberMatchDay].results;
     results.forEach(result => console.log(`${result.localTeam} ${result.localResult} - ${result.visitTeam} ${result.visitResult}`));
     const summary = group.summaries[indexNumberMatchDay].standings;
-    console.log(summary);
+/*     console.log(summary); */
+    console.table(summary.map(team => {
+      return {
+        Team: team.name,
+        Points: team.points,
+        PlayedMatches: team.matchesWon + team.matchesDrawn + team.matchesLost,
+        Won: team.matchesWon,
+        Drawn: team.matchesDrawn,
+        Lost: team.matchesLost,
+        GoalsFor: team.goalsFor,
+        GoalsAgainst: team.goalsAgainst,
+        GoalsDiff: team.goalsFor - team.goalsAgainst
+      }
+    }))
   });
 }
 
