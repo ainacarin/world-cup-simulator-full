@@ -32,7 +32,7 @@ groupsPhase.groups.forEach((group) => {
   let indexMatch = 1;
   group.matchScheduleDay.forEach((match) => {
     console.log();
-    console.log(`JORNADA ${indexMatch}`);
+    console.log(`Jornada ${indexMatch}`);
     match.forEach((matchDay) => {
       console.log(`- ${matchDay[LOCAL_TEAM]} vs ${matchDay[VISIT_TEAM]}`);
     });
@@ -50,8 +50,8 @@ for(let indexNumberMatchDay = 0; indexNumberMatchDay < numberMatchDay; indexNumb
     console.log(`Grupo ${group.name} - Jornada ${indexNumberMatchDay+1}`);
     console.log("-----------------------");
 /*     console.log(group.summaries[indexNumberMatchDay].results); */
-//       const result = summary.results;
-//      console.log(`${result.localTeam} ${result.localResult} - ${result.visitTeam} ${result.visitResult}`); 
+    const results = group.summaries[indexNumberMatchDay].results;
+    results.forEach(result => console.log(`${result.localTeam} ${result.localResult} - ${result.visitTeam} ${result.visitResult}`));
   });
 }
 

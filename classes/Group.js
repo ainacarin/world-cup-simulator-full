@@ -223,6 +223,7 @@ export default class Group {
         }
       }
     });
+    console.log(this.teams);
   }
 
   start() {
