@@ -1,7 +1,7 @@
 import { shuffle, generateResultGoals } from "../utils.js";
-import { groupsNames } from "../data.js";
-import Group from './Group.js';
-import Team from './Team.js';
+import { firstElementArray, groupsNames, secondElementArray } from "../data.js";
+import Group from "./Group.js";
+import Team from "./Team.js";
 
 export default class GroupPhase {
   constructor(name, teams = [], config = {}) {
@@ -11,14 +11,14 @@ export default class GroupPhase {
     this.teamsPerGroup = teams.length / groupsNames.length;
     this.groups = [];
     this.setup(teams, config);
-    /*         this.totalDataPlayOff = []; */
+    this.winnersToPlayOff = [];
   }
 
-    customizeTeam(teamName, group) {
+  customizeTeam(teamName, group) {
     return {
       name: teamName,
       group: group,
-/*       points: 0, */
+      /*       points: 0, */
       matchesWon: 0,
       matchesDrawn: 0,
       matchesLost: 0,
@@ -41,7 +41,7 @@ export default class GroupPhase {
   }
 
   getTeamsNames() {
-    return this.teams.map(team => team.name);
+    return this.teams.map((team) => team.name);
   }
 
   setupConfig(config) {
@@ -55,8 +55,8 @@ export default class GroupPhase {
   }
 
   setupGroups() {
-    for(let i = 0; i < groupsNames.length; i++) {
-      const teams = this.teams.filter(team => team.group == groupsNames[i]);
+    for (let i = 0; i < groupsNames.length; i++) {
+      const teams = this.teams.filter((team) => team.group == groupsNames[i]);
       const group = new Group(groupsNames[i], teams, this.config);
       this.groups.push(group);
     }
@@ -70,14 +70,52 @@ export default class GroupPhase {
   }
 
   configSchedulesMatchDays() {
-      this.groups.forEach(group => group.configScheduleMatchDays());
+    this.groups.forEach((group) => group.configScheduleMatchDays());
   }
 
-  start(){
-    this.groups.forEach(group => group.start());
+  start() {
+    this.groups.forEach((group) => group.start());
   }
 
   getNumberMatchDay() {
     return this.groups[0].summaries.length;
+  }
+
+  getWinnersToPlayoff() {
+    const maxTimes = 8;
+    let indexGroup = 0;
+    for (let indexTimes = 0; indexTimes < maxTimes; indexTimes++) {
+      if (indexTimes % 2 == 0) {
+        const groupX = this.groups[indexGroup];
+/*         console.log('GRUPO ',groupX.name); */
+        const lastStandingX = groupX.getLastStanding();
+        const firstWinner = lastStandingX[firstElementArray];
+/*         console.log('firs winner: ', firstWinner.name); */
+        this.winnersToPlayOff.push(firstWinner.name);
+      } else {
+        const groupY = this.groups[indexGroup];
+/*         console.log('GRUPO ',groupX.name); */
+        const lastStandingY = groupY.getLastStanding();
+        const secondWinner = lastStandingY[secondElementArray];
+        this.winnersToPlayOff.push(secondWinner.name);
+      }
+      indexGroup++;
+    }
+    indexGroup = 0;
+    for (let indexTimes = 0; indexTimes < maxTimes; indexTimes++) {
+      if (indexTimes % 2 == 0) {
+        const groupY = this.groups[indexGroup];
+        const lastStandingY = groupY.getLastStanding();
+        const secondWinner = lastStandingY[secondElementArray];
+        this.winnersToPlayOff.push(secondWinner.name);
+      } else {
+        const groupX = this.groups[indexGroup];
+        const lastStandingX = groupX.getLastStanding();
+        const firstWinner = lastStandingX[firstElementArray];
+        this.winnersToPlayOff.push(firstWinner.name);
+      }
+      indexGroup++;
+    }
+    return this.winnersToPlayOff;
   }
 }

@@ -12,6 +12,8 @@ export const LOCAL_TEAM = 0;
 export const localTeamText = 'Local Team';
 export const VISIT_TEAM = 1;
 export const visitTeamText = 'Visit Team';
+export const firstElementArray = 0;
+export const secondElementArray = 1;
 
 export const JORNADA = 'Jornada ';
 

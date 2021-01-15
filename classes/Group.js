@@ -250,4 +250,9 @@ export default class Group {
       this.summaries.push(matchSummary);
     });
   }
+
+  getLastStanding() {
+    const indexLastStanding = this.summaries.length - 1;
+    return this.summaries[indexLastStanding].standings;
+  }
 }

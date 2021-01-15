@@ -70,6 +70,8 @@ for(let indexNumberMatchDay = 0; indexNumberMatchDay < numberMatchDay; indexNumb
   });
 }
 
+console.log(groupsPhase.getWinnersToPlayoff());
+
 /* for (const team of groupsPhase.teams) {
   console.log(team)
 }
