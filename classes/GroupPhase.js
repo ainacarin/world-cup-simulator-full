@@ -116,6 +116,8 @@ export default class GroupPhase {
       }
       indexGroup++;
     }
-    return this.winnersToPlayOff;
+    console.log('winners',this.winnersToPlayOff);
+    const winnersReturn =  Object.assign({}, this.winnersToPlayOff)// this.winnersToPlayOff.map(team => Object.assign({}, team));
+    return winnersReturn;
   }
 }

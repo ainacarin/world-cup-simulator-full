@@ -27,7 +27,7 @@ export default class PlayOff {
   }
 
   setupTeams(teams) {
-    teams.shuffle();
+/*     teams.shuffle(); */
     for (let index = 0; index < NUMBER_TOTAL_TEAMS_PLAYOFF; index++) {
       const team = teams[index];
       this.teams.push(team);
