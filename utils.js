@@ -38,13 +38,6 @@ export const generateResultGoals = function() {
   }
 
   export const getWinnerTeamNameResult = function(teamA, teamB, matchSummaryResults, resultsBeforeMatchesDays) {
-/*     console.log('GET matchSummaryResults', matchSummaryResults);
-    console.log('GET resultsBeforeMatchesDays', resultsBeforeMatchesDays); */
-    /*console.log('GET matchSummaryResults');
-         for(let i = 0; i < matchSummaryResults.length; i++) {
-      console.log(matchSummaryResults[i]);
-      result = searchResultMatch(teamA, teamB, matchSummaryResults[i])
-    } */
     let result = searchResultMatch(teamA, teamB, matchSummaryResults);
     if(result.length == 0) {
       let found = false;
@@ -61,27 +54,4 @@ export const generateResultGoals = function() {
     } else {
       return getWinnerNameResult(result);
     }
-/*     console.log('GET resultsBeforeMatchesDays'); 
-    for(let i = 0; i < resultsBeforeMatchesDays.length; i++) {
-      const res = resultsBeforeMatchesDays[i];
-      for(let a = 0; a < res.length; a++) {
-        console.log(res[a]);
-      }
-    } */
-
-/*     const resultFiltered = searchResultMatch(teamA, teamB, matchSummaryResults);
-    if (resultFiltered.length > 0) {
-      return getWinnerNameResult(resultFiltered);
-    } else {
-      const found = false;
-      for (const i = 0; i < resultsBeforeMatchesDays.length && found == false; i++) {
-        const result = resultsBeforeMatchesDays[i];
-        resultFiltered = searchResultMatch(teamA, teamB, result);
-        if (result.length > 0) {
-          found = true;
-        }
-      }
-      return getWinnerNameResult(resultFiltered);
-    }  */
-/*     return null; */
   }

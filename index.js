@@ -1,7 +1,3 @@
-/* import { nameWorldCup, config } from './config.js'
-import { worldTeams, titlesPlayOff } from './data.js' 
-import WorldCupSimulator from "./classes/PlayOff.js";*/
-
 import { nameWorldCup, config } from "./config.js";
 import {
   worldTeams,
@@ -11,7 +7,6 @@ import {
   LOCAL_TEAM,
   VISIT_TEAM,
 } from "./data.js";
-/* import WorldCupSimulator from "./classes/GroupsPhase_01.js"; */
 import WorldCupSimulator from "./classes/GroupPhase.js";
 import Group from "./classes/Group.js";
 import GroupPhase from "./classes/GroupPhase.js";
@@ -20,9 +15,12 @@ import PlayOff from "./classes/PlayOff.js"
 /* VARIABLES */
 let winnerWorldCup = "";
 
+//FASE DE GRUPOS
 const groupsPhase = new WorldCupSimulator(nameWorldCup, worldTeams, config);
 //Muestra título de campeonato
 console.log(groupsPhase.name);
+console.log('Grupos y equipos');
+console.log('===============================');
 //Muestra grupos con equipos participantes
 groupsPhase.configSchedulesMatchDays();
 groupsPhase.groups.forEach((group) => {
@@ -40,6 +38,7 @@ groupsPhase.groups.forEach((group) => {
     indexMatch++;
   });
 });
+console.log();
 console.log("===============================================");
 console.log("============== COMIENZA EL MUNDIAL ============");
 console.log("===============================================");
@@ -48,46 +47,39 @@ const numberMatchDay = groupsPhase.getNumberMatchDay();
 for(let indexNumberMatchDay = 0; indexNumberMatchDay < numberMatchDay; indexNumberMatchDay++) {
   groupsPhase.groups.forEach(group => {
     console.log();
-    console.log(`Grupo ${group.name} - Jornada ${indexNumberMatchDay+1}`);
+    console.log(`Grupo ${group.name} - Jornada ${indexNumberMatchDay+1}:`);
     console.log("-----------------------");
-/*     console.log(group.summaries[indexNumberMatchDay].results); */
     const results = group.summaries[indexNumberMatchDay].results;
     results.forEach(result => console.log(`${result.localTeam} ${result.localResult} - ${result.visitTeam} ${result.visitResult}`));
     const summary = group.summaries[indexNumberMatchDay].standings;
-/*     console.log(summary); */
     console.table(summary.map(team => {
       return {
-        Team: team.name,
-        Points: team.points,
-        PlayedMatches: team.matchesWon + team.matchesDrawn + team.matchesLost,
-        Won: team.matchesWon,
-        Drawn: team.matchesDrawn,
-        Lost: team.matchesLost,
-        GoalsFor: team.goalsFor,
-        GoalsAgainst: team.goalsAgainst,
-        GoalsDiff: team.goalsFor - team.goalsAgainst
+        Equipo: team.name,
+        Puntos: team.points,
+        //PlayedMatches: team.matchesWon + team.matchesDrawn + team.matchesLost,
+        //Won: team.matchesWon,
+        //Drawn: team.matchesDrawn,
+        //Lost: team.matchesLost,
+        'Goles a favor': team.goalsFor,
+        'Goles en contra': team.goalsAgainst,
+        'Diferencia goles': team.goalsFor - team.goalsAgainst
       }
     }))
   });
 }
 
-/* console.log(groupsPhase.getWinnersToPlayoff()); */
-
-
- //MAIN PROGRAM
+//FASE DE ELIMINATORIAS
 const winnersPlayoff = groupsPhase.getWinnersToPlayoff();
 const playOff = new PlayOff(nameWorldCup, winnersPlayoff, config);
 playOff.start();
-
-//DISPLAY
-console.log('');
-console.log(`${playOff.name}`);
+console.log();
 console.log('==============================================');
 console.log('==== COMIENZO DE LA FASE DE ELIMINATORIAS ====');
 console.log('==============================================');
 for (let i = 0; i < playOff.totalDataPlayOff.length; i++) {
-  console.log('');
+  console.log();
   console.log(`==== ${titlesPlayOff[i]} ====`);
+  console.log();
   for (const match of playOff.totalDataPlayOff[i]) {
     let winnerTeam = match.localTeam;
     if (match.resultLocalTeam < match.resultVisitTeam) {

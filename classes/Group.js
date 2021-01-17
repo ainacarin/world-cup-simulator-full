@@ -1,5 +1,3 @@
-/* import { LOCAL_TEAM, localTeamText, VISIT_TEAM, visitTeamText } from "../data";
- */
 import { generateResultGoals, getWinnerTeamNameResult } from "../utils.js";
 
 const LOCAL_TEAM = 0;
@@ -137,54 +135,6 @@ export default class Group {
       }
     }
   }
-
-/*   searchResultMatch(teamA, teamB, results) {
-    const result = [];
-    result = results.filter(
-      (result) =>
-        result.localTeam == teamA.name && result.visitTeam == teamB.name
-    );
-    if (result.length == 0) {
-      result = results.filter(
-        (result) =>
-          result.localTeam == teamB.name && result.visitTeam == teamA.name
-      );
-    }
-    return result;
-  } */
-
-/*   getWinnerNameResult(result) {
-    if (result.localResult > result.visitResult) {
-      return result.localTeam;
-    } else if (result.localResult < result.visitResult) {
-      return result.visitTeam;
-    } else {
-      return null;
-    }
-  } */
-
- /*  getWinnerTeamName(teamA, teamB, matchSummaryResults, resultsBeforeMatchesDays) {
-    console.log('GETWINNERTEAMNAME TEAM A', teamA);
-    console.log('GETWINNERTEAMNAME TEAM B', teamB);
-    console.log('GETWINNERTEAMNAME RESULTS', matchSummaryResults);
-    console.log('GETWINNERTEAMNAME RESULTS BEFORE', resultsBeforeMatchesDays); */
-/*     const resultFiltered = [];
-    resultFiltered = this.searchResultMatch(teamA, teamB, matchSummaryResults);
-    if (resultFiltered.length > 0) {
-      return this.getWinnerNameResult(resultFiltered);
-    } else {
-      const found = false;
-      for (const i = 0; i < this.summaries.length && found == false; i++) {
-        const summary = this.summaries[i];
-        resultFiltered = this.searchResultMatch(teamA, teamB, summary);
-        if (result.length > 0) {
-          found = true;
-        }
-      }
-      return this.getWinnerNameResult(resultFiltered);
-    } */
-/*     return null;
-  } */
 
   calculateStandings(matchSummaryResults, summaries) {
     const resultsBeforeMatchesDays = summaries.map(summary => summary.results);

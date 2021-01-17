@@ -18,7 +18,6 @@ export default class GroupPhase {
     return {
       name: teamName,
       group: group,
-      /*       points: 0, */
       matchesWon: 0,
       matchesDrawn: 0,
       matchesLost: 0,
@@ -87,14 +86,11 @@ export default class GroupPhase {
     for (let indexTimes = 0; indexTimes < maxTimes; indexTimes++) {
       if (indexTimes % 2 == 0) {
         const groupX = this.groups[indexGroup];
-/*         console.log('GRUPO ',groupX.name); */
         const lastStandingX = groupX.getLastStanding();
         const firstWinner = lastStandingX[firstElementArray];
-/*         console.log('firs winner: ', firstWinner.name); */
         this.winnersToPlayOff.push(firstWinner.name);
       } else {
         const groupY = this.groups[indexGroup];
-/*         console.log('GRUPO ',groupX.name); */
         const lastStandingY = groupY.getLastStanding();
         const secondWinner = lastStandingY[secondElementArray];
         this.winnersToPlayOff.push(secondWinner.name);
@@ -116,8 +112,7 @@ export default class GroupPhase {
       }
       indexGroup++;
     }
-    console.log('winners',this.winnersToPlayOff);
-    const winnersReturn =  Object.assign({}, this.winnersToPlayOff)// this.winnersToPlayOff.map(team => Object.assign({}, team));
+    const winnersReturn =  Object.assign({}, this.winnersToPlayOff);
     return winnersReturn;
   }
 }
